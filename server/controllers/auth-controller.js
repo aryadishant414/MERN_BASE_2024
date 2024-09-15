@@ -20,8 +20,11 @@ const homePageController = async (req, res) => {
 // Registration Controller
 const registerPageController = async (req, res) => {
     try {
-
-        res.status(200).send("<h1>Register Page using Controller</h1>")
+        const requestedData = req.body;
+        // console.log(requestedData);  // testing purpose
+        res.status(200).send({
+            data: requestedData,
+        })
 
     } catch (error) {
 

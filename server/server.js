@@ -1,11 +1,14 @@
-// THIS file is Creating the SERVER by using Express
+// THIS file is Creating the Backend SERVER by using Express
 
 import express from 'express';
 import 'dotenv/config';
 import {router} from './routes/auth-router.js';
 
 
+
 const app = express();
+
+app.use(express.json());  // Its a middleware that Allow us to send and receive data in JSON FORMAT througout our Backend
 
 app.use("/api/v1/auth",router);
 

@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.route("/").get(homePageController);
-router.route("/register").get(registerPageController);
+router.route("/register").post(registerPageController);
 
 // router.get("/" , (req,res) => {
 //     res.status(200).send("<h1>Home Page using router</h1>")
