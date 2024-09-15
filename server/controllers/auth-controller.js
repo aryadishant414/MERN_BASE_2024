@@ -22,7 +22,7 @@ const registerPageController = async (req, res) => {
     try {
         const requestedData = req.body;
         // console.log(requestedData);  // testing purpose
-        res.status(200).send({
+        res.status(2Ex00).send({
             data: requestedData,
         })
 
