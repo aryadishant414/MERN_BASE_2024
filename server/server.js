@@ -2,21 +2,26 @@
 
 import express from 'express';
 import 'dotenv/config';
+import {router} from './routes/auth-router.js';
+
 
 const app = express();
 
+app.use("/api/v1/auth",router);
 
-app.get("/" , (req, res) => {
-    res.status(200).send("<h1>Home Page</h1>");
-})
-app.get("/register" , (req, res) => {
-    res.status(200).send("<h1>Register Page</h1>");
-})
-app.get("/login" , (req, res) => {
-    res.status(200).send("<h1>Login Page</h1>");
-})
 
-// console.log("PORT IS : " , process.env.PORT); // just to check
+
+// app.get("/" , (req, res) => {
+//     res.status(200).send("<h1>Home Page</h1>");
+// })
+// app.get("/register" , (req, res) => {
+//     res.status(200).send("<h1>Register Page</h1>");
+// })
+// app.get("/login" , (req, res) => {
+//     res.status(200).send("<h1>Login Page</h1>");
+// })
+
+
 
 
 
