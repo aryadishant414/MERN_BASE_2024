@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import  bcrypt  from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 const userSchema = new mongoose.Schema(
     {
@@ -48,6 +49,29 @@ userSchema.pre("save", async function (next) {
         next(error);
     }
 })
+
+
+
+// json web token
+// used for Authentication (means verification)
+// and for Authorization (means what actions the user is allowed to perform and what not)
+userSchema.methods.generateToken = async function () {
+    try {
+        return jwt.sign({   // inside this is our user PAYLOAD
+            userId: this._id.toString(),
+            email: this.email,
+            isAdmin: this.isAdmin,
+        },
+        process.env.JWT_SECRET_KEY,  // this is JWT Signature
+        {
+            expiresIn: "30d",  // this field is Optional
+        }
+    );
+    } catch (error) {
+        console.error(error);
+        
+    }
+}
 
 
 // Define the model or the collection name

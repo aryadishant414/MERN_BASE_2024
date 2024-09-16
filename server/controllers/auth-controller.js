@@ -38,7 +38,9 @@ const registerPageController = async (req, res) => {
         // console.log(requestedData);  // testing purpose
         res.status(201).send({
             message: "User Registered Successfully",
-            data: createdUser
+            data: createdUser,
+            token: await createdUser.generateToken(),
+            userId: createdUser._id.toString(),
         })
 
     } catch (error) {
