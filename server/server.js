@@ -1,8 +1,9 @@
 // THIS file is Creating the Backend SERVER by using Express
 
-import express from 'express';
 import 'dotenv/config';
+import express from 'express';
 import {router} from './routes/auth-router.js';
+import { connectDB } from './utils/db.js';
 
 
 
@@ -30,7 +31,14 @@ app.use("/api/v1/auth",router);
 
 const port = process.env.PORT || 5000;
 
-// Starting server
-app.listen(port, () => {
-    console.log(`Server is Running on Port ${port}`);
+// Connecting Backend with our Database and Starting server 
+connectDB().then( () => {
+    app.listen(port, () => {
+        console.log(`Server is Running on Port ${port}`);
+    })
 })
+
+
+// app.listen(port, () => {
+//     console.log(`Server is Running on Port ${port}`);
+// })
