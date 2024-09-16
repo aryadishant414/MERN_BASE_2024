@@ -1,6 +1,4 @@
-
-
-
+import {User} from '../models/user-model.js'
 
 // Home-Page Controller
 const homePageController = async (req, res) => {
@@ -20,10 +18,21 @@ const homePageController = async (req, res) => {
 // Registration Controller
 const registerPageController = async (req, res) => {
     try {
-        const requestedData = req.body;
+        const {name, email, password, phone} = req.body;
+
+        // check if user already exist on Database
+        const userExist = await User.findOne({email: email});
+        if(userExist) {
+            return res.status(400).send({
+                msg:"User Already Exist"
+            })
+        }
+
+        const createdUser = await User.create({name, email, password, phone});
+
         // console.log(requestedData);  // testing purpose
         res.status(200).send({
-            data: requestedData,
+            data: createdUser
         })
 
     } catch (error) {

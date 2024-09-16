@@ -29,3 +29,5 @@ const userSchema = new mongoose.Schema(
 )
 
 export const User = mongoose.model('User', userSchema);
+
+// NOTE : Creating Model means we are creating the Collection in Database (on whichever Database we are connected right now)
