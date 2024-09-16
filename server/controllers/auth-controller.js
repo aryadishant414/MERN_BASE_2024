@@ -1,4 +1,5 @@
 import {User} from '../models/user-model.js'
+import bcrypt from 'bcryptjs'
 
 // Home-Page Controller
 const homePageController = async (req, res) => {
@@ -28,10 +29,15 @@ const registerPageController = async (req, res) => {
             })
         }
 
-        const createdUser = await User.create({name, email, password, phone});
+        // hash password (method 1) AND check the METHOD 2 in User Model
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+        const createdUser = await User.create({name: name, email: email, password: hashedPassword, phone: phone});
 
         // console.log(requestedData);  // testing purpose
-        res.status(200).send({
+        res.status(201).send({
+            message: "User Registered Successfully",
             data: createdUser
         })
 
