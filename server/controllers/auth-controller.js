@@ -30,10 +30,10 @@ const registerPageController = async (req, res) => {
         }
 
         // hash password (method 1) AND check the METHOD 2 in User Model
-        const saltRounds = 10;
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        // const saltRounds = 10;
+        // const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        const createdUser = await User.create({name: name, email: email, password: hashedPassword, phone: phone});
+        const createdUser = await User.create({name: name, email: email, password: password, phone: phone});
 
         // console.log(requestedData);  // testing purpose
         res.status(201).send({
