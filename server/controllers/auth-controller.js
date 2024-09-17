@@ -1,7 +1,8 @@
 import {User} from '../models/user-model.js'
 import bcrypt from 'bcryptjs'
 
-// Home-Page Controller
+// **************** Home-Page Controller **************************
+// ****************************************************************
 const homePageController = async (req, res) => {
     try {
 
@@ -41,7 +42,7 @@ const registerPageController = async (req, res) => {
         res.status(201).send({
             message: "User Registered Successfully",
             data: createdUser,
-            token: await createdUser.generateToken(),
+            token: await createdUser.generateToken(),  // generate token function calling at User Model
             userId: createdUser._id.toString(),
         })
 
@@ -68,9 +69,20 @@ const loginPageController = async (req, res) => {
                 message: "Invalid User Credentials"
             })
         }
+        // console.log("USER TOO EXIST KRTA HAI");  // just a check
+        
 
-        // compare password
-        const isPasswordValid = await bcrypt.compare(password, userExist.password);
+        // compare password using bcrypt (Method 1) , And check method 2 in User Model 
+        // const isPasswordValid = await bcrypt.compare(password, userExist.password);
+
+
+        // console.log("Standing Before ISPASSWORD VALID");  // just a check
+
+        // compare password method calling at User Model
+        const isPasswordValid = await userExist.comparePassword(password);
+
+        // console.log("Standing After ISPASSWORD VALID");  // just a check
+        
 
         if(!isPasswordValid) {
             return res.status(404).send({

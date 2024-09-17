@@ -30,7 +30,8 @@ const userSchema = new mongoose.Schema(
     {timestamps: true}
 )
 
-// password hashing (Method 2)
+// ********* password hashing using bcrypt (Method 2) *********************
+// ************************************************************
 userSchema.pre("save", async function (next) {
     // console.log("pre method", this);
     const user = this;
@@ -51,10 +52,17 @@ userSchema.pre("save", async function (next) {
 })
 
 
+// ******************* compare password using bcrypt ******************************
+userSchema.methods.comparePassword = async function (password) {
+    // console.log("INSIDE THIS : ", this); // just to check
+    return bcrypt.compare(password, this.password);
+}
 
-// json web token
+
+// *************** json web token *******************************************************
 // used for Authentication (means verification)
 // and for Authorization (means what actions the user is allowed to perform and what not)
+// **************************************************************************************
 userSchema.methods.generateToken = async function () {
     try {
         return jwt.sign({   // inside this is our user PAYLOAD
