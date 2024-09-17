@@ -1,11 +1,12 @@
 import express from 'express';
-import { homePageController, registerPageController } from '../controllers/auth-controller.js';
+import { homePageController, registerPageController, loginPageController} from '../controllers/auth-controller.js';
 
 const router = express.Router();
 
 
 router.route("/").get(homePageController);
 router.route("/register").post(registerPageController);
+router.route("/login").post(loginPageController);
 
 // router.get("/" , (req,res) => {
 //     res.status(200).send("<h1>Home Page using router</h1>")

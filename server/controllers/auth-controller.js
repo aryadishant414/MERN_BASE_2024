@@ -16,7 +16,9 @@ const homePageController = async (req, res) => {
 
 
 
-// Registration Controller
+// ******************** Registration Controller **************************
+//  **********************************************************************
+
 const registerPageController = async (req, res) => {
     try {
         const {name, email, password, phone} = req.body;
@@ -52,5 +54,53 @@ const registerPageController = async (req, res) => {
 
 
 
+// ************** Login Controller **********************
+// ******************************************************
+const loginPageController = async (req, res) => {
+    try {
+        
+        const {email, password} = req.body;
 
-export {homePageController, registerPageController};
+        // check is email exist in database
+        const userExist = await User.findOne({email: email});
+        if(!userExist) {
+            return res.status(404).send({
+                message: "Invalid User Credentials"
+            })
+        }
+
+        // compare password
+        const isPasswordValid = await bcrypt.compare(password, userExist.password);
+
+        if(!isPasswordValid) {
+            return res.status(404).send({
+                message: "Check your email or password"
+            })
+        }
+        res.status(200).send({
+            message: "Login Successful",
+            data: {
+                email: userExist.email,
+                phone: userExist.phone,
+            },
+            token: await userExist.generateToken(),
+            userId: userExist._id.toString(),
+        })
+
+
+    } catch (error) {
+        res.status(500).send({
+            message:"Error at Server Side"
+        })
+        
+    }
+}
+
+
+
+
+
+
+
+
+export {homePageController, registerPageController, loginPageController};
