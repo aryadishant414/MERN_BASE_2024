@@ -5,9 +5,18 @@ export const validate = (schema) => async (req, res, next) => {  // here the "sc
       req.body = parseBody;
       next();
     } catch (err) {
-      const message = err.errors[0].message;
+      const status = 422;
+      const message = 'Fill the input properly';
+      const extraDetails = err.errors[0].message;
+
+      const error = {
+        status,
+        message,
+        extraDetails
+      }
       console.log(message);
-      res.status(400).send({message:message})
+      // res.status(400).send({message:message})
+      next(error);
       
 
     }
