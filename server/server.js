@@ -2,9 +2,10 @@
 
 import 'dotenv/config';
 import express from 'express';
-import {router} from './routes/auth-router.js';
+import {router as authRoute} from './routes/auth-router.js';
 import { connectDB } from './utils/db.js';
 import { errorMiddleware } from './middlewares/error-middleware.js';
+import { contactFormController as contactFormRoute } from './routes/contact-router.js';
 
 
 
@@ -13,7 +14,8 @@ const app = express();
 app.use(express.json());  // Its a middleware that Allow us to send and receive data in JSON FORMAT througout our Backend
 // NOTE : ".use" is a method used add middleware functions to your application. Middleware functions are like little helpers that sit between the client request and the server response.
 
-app.use("/api/v1/auth",router);
+app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/form", contactFormRoute);
 
 app.use(errorMiddleware);
 
