@@ -22,7 +22,7 @@ const homePageController = async (req, res) => {
 
 const registerPageController = async (req, res) => {
     try {
-        const {name, email, password, phone} = req.body;
+        const {username, email, password, phone} = req.body;
 
         // check if user already exist on Database
         const userExist = await User.findOne({email: email});
@@ -36,7 +36,7 @@ const registerPageController = async (req, res) => {
         // const saltRounds = 10;
         // const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        const createdUser = await User.create({name: name, email: email, password: password, phone: phone});
+        const createdUser = await User.create({username: username, email: email, password: password, phone: phone});
 
         // console.log(requestedData);  // testing purpose
         res.status(201).send({

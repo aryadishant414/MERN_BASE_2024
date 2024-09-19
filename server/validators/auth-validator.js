@@ -2,7 +2,7 @@ import { z } from "zod";
 
 // Creating an object schema
 export const signupSchema = z.object({
-      name: z
+      username: z
       .string({ required_error: "Name is required" })
       .trim()
       .min(3, { message: "Name must be at least of 3 characters" })
