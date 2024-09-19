@@ -9,7 +9,7 @@ export const RegisterPage = () => {
     });
 
     const handleInput = (e) => {
-        console.log("INPUT HAS BEEN CHNAGED : " , e);
+        // console.log("Register page INPUT HAS BEEN CHNAGED : " , e); // just to check
         let name = e.target.name;
         let value = e.target.value;
     
@@ -35,15 +35,15 @@ export const RegisterPage = () => {
                         <div className="container grid grid-two-cols">
                             <div className="registration-image reg-img">
                                 <img
-                                src="/images/register.png"
-                                alt="a nurse with a cute look"
+                                src="/images/login.png"
+                                alt="let's fill the login form"
                                 width="400"
                                 height="500"
                                 />
                             </div>
                             {/* our main registration code  */}
                             <div className="registration-form">
-                                <h1 className="main-heading mb-3">registration form</h1>
+                                <h1 className="main-heading mb-3">Registration Form</h1>
                                 <br />
                                 <form onSubmit={handleSubmit}>
                                     <div>
