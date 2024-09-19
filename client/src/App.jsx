@@ -5,11 +5,13 @@ import {ContactPage} from "./pages/ContactPage.jsx"
 import {ServicePage} from "./pages/ServicePage.jsx"
 import {RegisterPage} from "./pages/RegisterPage.jsx"
 import {LoginPage} from "./pages/LoginPage.jsx"
+import { Navbar } from "./components/Navbar.jsx";
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
+        <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
