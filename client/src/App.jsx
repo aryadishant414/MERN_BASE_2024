@@ -7,6 +7,7 @@ import {RegisterPage} from "./pages/RegisterPage.jsx"
 import {LoginPage} from "./pages/LoginPage.jsx"
 import { Navbar } from "./components/Navbar.jsx";
 import { PageNotFound } from "./pages/pageNotFound.jsx";
+import { Footer } from "./components/Footer/Footer.jsx";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   )

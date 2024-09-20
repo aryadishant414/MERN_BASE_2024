@@ -423,6 +423,9 @@ a.active {
 
 .section-registration {
   padding: 0 3.2rem;
+  /* border: 2px solid red; */
+  height: 100vh;  
+/*this upper height i have set so that footer can be at its correct possition  */
 
   & .container {
     /* background-color: #fff; */
