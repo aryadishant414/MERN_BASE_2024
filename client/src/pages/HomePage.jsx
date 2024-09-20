@@ -1,3 +1,5 @@
+import {Analytics} from "../components/Analytics.jsx"
+
 export const HomePage = () => {
   return (
     <>
@@ -37,7 +39,7 @@ export const HomePage = () => {
       </main>
 
       {/* 2nd section  */}
-      {/* <Analytics /> */}
+      <Analytics />
 
       {/* 3rd section  */}
       <section className="section-hero">
