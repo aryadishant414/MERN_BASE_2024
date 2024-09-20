@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {useNavigate} from "react-router-dom";
 
 export const RegisterPage = () => {
     const[user, setUser] = useState({
@@ -7,6 +8,8 @@ export const RegisterPage = () => {
         phone: "",
         password: "",
     });
+
+    const navigate = useNavigate();
 
     const handleInput = (e) => {
         // console.log("Register page INPUT HAS BEEN CHNAGED : " , e); // just to check
@@ -44,6 +47,7 @@ export const RegisterPage = () => {
                 phone: "",
                 password: "",
             });
+            navigate("/login");    
         }
 
     } catch (error) {
