@@ -20,9 +20,37 @@ export const RegisterPage = () => {
     };
     
     // handle form on submit
-    const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(user);
+    const handleSubmit = async (e) => {
+    try {
+        e.preventDefault();
+        console.log("Registered user details are : " , user);
+    
+        // sending user data to Database
+        const response = await fetch("http://localhost:8000/api/v1/auth/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user),
+        });
+        console.log("Register Response is : ", response);
+
+        
+        // lets empty the state variable
+        if(response.ok) {
+            setUser({
+                username: "",
+                email: "",
+                phone: "",
+                password: "",
+            });
+        }
+
+    } catch (error) {
+        console.log("Error in user Registration");
+    }
+    
+
     };
 
 

@@ -6,10 +6,22 @@ import {router as authRoute} from './routes/auth-router.js';
 import { connectDB } from './utils/db.js';
 import { errorMiddleware } from './middlewares/error-middleware.js';
 import { contactFormController as contactFormRoute } from './routes/contact-router.js';
+import cors from "cors";
 
+
+// lets handle cors (cross origin resource sharing) error
+var corsOptions = {
+    origin: "http://localhost:5173",
+    methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
+    credentials: true,
+  }
 
 
 const app = express();
+
+app.use(cors(corsOptions));
+
+
 
 app.use(express.json());  // Its a middleware that Allow us to send and receive data in JSON FORMAT througout our Backend
 // NOTE : ".use" is a method used add middleware functions to your application. Middleware functions are like little helpers that sit between the client request and the server response.
