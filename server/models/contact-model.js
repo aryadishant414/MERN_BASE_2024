@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 
 const contactSchema = new mongoose.Schema(
     {
-        name: {
+        username: {
             type: String,
             required: true,
         },
