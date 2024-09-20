@@ -51,7 +51,7 @@ export const RegisterPage = () => {
         }
 
     } catch (error) {
-        console.log("Error in user Registration");
+        console.log("Error in user Registration",error);
     }
     
 

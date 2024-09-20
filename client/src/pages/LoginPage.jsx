@@ -1,10 +1,14 @@
-import { useState } from "react"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 export const LoginPage = () => {
     const [user, setUser] = useState({
         email: "",
         password: "",
     })
+
+    const navigate = useNavigate();
 
     const handleInput = (e) => {
         // console.log("Login Page INPUT has been changed", e);
@@ -19,9 +23,43 @@ export const LoginPage = () => {
         );
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // console.log("Form has been Submitted", user);
+    const handleSubmit = async (e) => {
+       try {
+         e.preventDefault();
+         // console.log("Form has been Submitted", user);
+
+         let response = await fetch("http://localhost:8000/api/v1/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user)
+         });
+
+         console.log("Login user Response is : ", response);
+
+         
+         // lets empty the state variable
+        if(response.ok) {
+            alert("Login Successful");
+            setUser({
+                email: "",
+                password: "",
+            });
+            navigate("/");  
+        }
+        else {
+            alert("Invalid Credentials");
+            setUser({
+                email: "",
+                password: "",
+            });
+        }
+         
+       } catch (error) {
+            console.log("Error in User Login : ", error);
+            
+       }
         
     }
 
