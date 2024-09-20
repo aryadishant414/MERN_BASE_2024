@@ -6,6 +6,7 @@ import {ServicePage} from "./pages/ServicePage.jsx"
 import {RegisterPage} from "./pages/RegisterPage.jsx"
 import {LoginPage} from "./pages/LoginPage.jsx"
 import { Navbar } from "./components/Navbar.jsx";
+import { PageNotFound } from "./pages/pageNotFound.jsx";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/service" element={<ServicePage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </>
