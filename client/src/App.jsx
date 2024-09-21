@@ -8,23 +8,26 @@ import {LoginPage} from "./pages/LoginPage.jsx"
 import { Navbar } from "./components/Navbar.jsx";
 import { PageNotFound } from "./pages/pageNotFound.jsx";
 import { Footer } from "./components/Footer/Footer.jsx";
+import { AuthProvider } from "./store/Auth.jsx";
 
 const App = () => {
   return (
     <>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/service" element={<ServicePage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/service" element={<ServicePage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+          <Footer />
+        </BrowserRouter>
+      </AuthProvider>
     </>
   )
 }

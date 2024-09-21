@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../store/Auth.jsx";
 
 
 export const LoginPage = () => {
@@ -9,6 +10,7 @@ export const LoginPage = () => {
     })
 
     const navigate = useNavigate();
+    const {storeTokenInLocalStorage} = useAuth();
 
     const handleInput = (e) => {
         // console.log("Login Page INPUT has been changed", e);
@@ -42,6 +44,13 @@ export const LoginPage = () => {
          // lets empty the state variable
         if(response.ok) {
             alert("Login Successful");
+
+            const res_data = await response.json(response);
+            console.log("Login Responsed data from server in JSON format is : ", res_data);
+
+            // storing server responsed "token" to our "localStorage"
+            storeTokenInLocalStorage(res_data.token); 
+            
             setUser({
                 email: "",
                 password: "",

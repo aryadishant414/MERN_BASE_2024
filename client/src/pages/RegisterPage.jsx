@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {useNavigate} from "react-router-dom";
+import { useAuth } from "../store/Auth.jsx";
 
 export const RegisterPage = () => {
     const[user, setUser] = useState({
@@ -10,6 +11,7 @@ export const RegisterPage = () => {
     });
 
     const navigate = useNavigate();
+    const {storeTokenInLocalStorage} = useAuth();
 
     const handleInput = (e) => {
         // console.log("Register page INPUT HAS BEEN CHNAGED : " , e); // just to check
@@ -39,8 +41,18 @@ export const RegisterPage = () => {
         console.log("Register Response is : ", response);
 
         
+        
         // lets empty the state variable
         if(response.ok) {
+            
+            // client requested server responsed data
+            const user_data = await response.json(response);
+            console.log("Register page Server responsed data is : ", user_data);
+
+            // storing server responsed "token" on our "localStorage"
+            storeTokenInLocalStorage(user_data.token);
+            
+            
             setUser({
                 username: "",
                 email: "",
