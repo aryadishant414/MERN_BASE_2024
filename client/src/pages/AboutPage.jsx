@@ -1,8 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { Analytics } from "../components/Analytics.jsx";
+import { useAuth } from "../store/Auth.jsx";
 
 
 export const AboutPage = () => {
+
+    const {user} = useAuth();
+
     return (
         <>
       <main>
@@ -10,7 +14,11 @@ export const AboutPage = () => {
           <div className="container grid grid-two-cols">
             <div className="hero-content">
               {/* <p>We care to cure your Health</p> */}
-
+              <p>Welcome,
+                {
+                  user ? ` ${user.username} to our Website` : " to our Website"
+                }
+              </p>
               <h1>Why Choose Us? </h1>
               <p>
                 Expertise: Our team consists of experienced IT professionals who
