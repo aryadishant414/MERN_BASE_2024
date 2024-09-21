@@ -12,7 +12,6 @@ export const ContactPage = () => {
   // logic code to show and autofill the logged in user data in FRONTEND
   const [userData, setUserData] = useState(true);
   const {user} = useAuth();
-
   if(user && userData) {
     setContact({
       username: user.username,
@@ -21,6 +20,7 @@ export const ContactPage = () => {
     });
     setUserData(false);
   }
+
 
   // lets tackle our handleInput
   const handleInput = (e) => {
@@ -34,10 +34,32 @@ export const ContactPage = () => {
   };
 
   // handle fomr getFormSubmissionInfo
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    console.log(contact);
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+  
+      const response = await fetch("http://localhost:8000/api/v1/form/contact",{
+        method:"POST",
+        headers: {
+          "Content-Type" : "application/json",
+        },
+        body: JSON.stringify(contact),
+      });
+  
+      if(response.ok) {
+        setContact({
+          username: "",
+          email: "",
+          message: "",
+        });
+        alert("Contact form submitted successfully");
+      }
+  
+      // console.log(contact);
+    } catch (error) {
+      console.log("Contact form is not Submitted and the Error is : ", error);
+      
+    }
   };
 
   return (
