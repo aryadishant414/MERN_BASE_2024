@@ -9,6 +9,7 @@ import { Navbar } from "./components/Navbar.jsx";
 import { PageNotFound } from "./pages/pageNotFound.jsx";
 import { Footer } from "./components/Footer/Footer.jsx";
 import { AuthProvider } from "./store/Auth.jsx";
+import { LogoutPage } from './pages/LogoutPage.jsx';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/service" element={<ServicePage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/logout" element={<LogoutPage />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           <Footer />
