@@ -111,9 +111,27 @@ const loginPageController = async (req, res) => {
 
 
 
+// ************** User Controller 
+// to send user data - User Logic
+// **********************
+// ******************************************************
+
+const userController = async (req,res) => {
+    try {
+        const userData = req.userxx;   // this 'req.userxx' is coming from "authMiddleware" inside this req(request)
+        console.log(userData);
+        res.status(200).send({message: userData});
+    } catch (error) {
+        console.log(`error from the user route ${error}`);
+    }
+}
 
 
 
 
 
-export {homePageController, registerPageController, loginPageController};
+
+
+
+
+export {homePageController, registerPageController, loginPageController, userController};

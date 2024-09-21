@@ -1,7 +1,8 @@
 import express from 'express';
-import { homePageController, registerPageController, loginPageController} from '../controllers/auth-controller.js';
+import { homePageController, registerPageController, loginPageController, userController} from '../controllers/auth-controller.js';
 import {validate} from '../middlewares/validate-middleware.js'
 import {signupSchema} from '../validators/auth-validator.js'
+import { authMiddleware } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
@@ -14,6 +15,8 @@ router.route("/register")
 );
 
 router.route("/login").post(loginPageController);
+
+router.route("/user").get(authMiddleware,userController);
 
 // router.get("/" , (req,res) => {
 //     res.status(200).send("<h1>Home Page using router</h1>")
