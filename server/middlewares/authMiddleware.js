@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { User } from './../models/user-model.js';
 
 export const authMiddleware = async (req, res, next) => {
-    console.log("INSIDE REQ is : ", req);
+    // console.log("INSIDE REQ is : ", req);
     
     try {
         const token = req.header("Authorization");
@@ -16,11 +16,11 @@ export const authMiddleware = async (req, res, next) => {
         // Assuming token is in the format "Bearer <jwtToken>, Removing the "Bearer" prefix"
         // removing "Bearer " from the token received from frontend/client side
         const jwtToken = token.replace("Bearer","").trim();
-        console.log("After removing Bearer space : ", jwtToken);
+        // console.log("After removing Bearer space : ", jwtToken);
         
     
         const isVerified = jwt.verify(jwtToken, process.env.JWT_SECRET_KEY);
-        console.log("data INside isVerified is : ", isVerified);
+        // console.log("data INside isVerified is : ", isVerified);
         
         const userData = await User.findOne({email: isVerified.email}).select({password: 0,});
 

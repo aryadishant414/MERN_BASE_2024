@@ -120,7 +120,7 @@ const userController = async (req,res) => {
     try {
         const userData = req.userxx;   // this 'req.userxx' is coming from "authMiddleware" inside this req(request)
         console.log(userData);
-        res.status(200).send({message: userData});
+        res.status(200).send({userData});
     } catch (error) {
         console.log(`error from the user route ${error}`);
     }

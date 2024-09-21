@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {useAuth} from "../store/Auth.jsx"
 
 export const ContactPage = () => {
   const [contact, setContact] = useState({
@@ -6,6 +7,20 @@ export const ContactPage = () => {
     email: "",
     message: "",
   });
+
+
+  // logic code to show and autofill the logged in user data in FRONTEND
+  const [userData, setUserData] = useState(true);
+  const {user} = useAuth();
+
+  if(user && userData) {
+    setContact({
+      username: user.username,
+      email: user.email,
+      message:"",
+    });
+    setUserData(false);
+  }
 
   // lets tackle our handleInput
   const handleInput = (e) => {
