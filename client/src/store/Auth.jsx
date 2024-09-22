@@ -11,6 +11,7 @@ export const AuthProvider = ({children}) => {
 
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [user, setUser] = useState("");
+    const [service, setService] = useState("");
 
     const isLoggedIn = !!token; // Means agr token hai too "isLoggedIn" will be true or nhi hai too false
 
@@ -49,12 +50,43 @@ export const AuthProvider = ({children}) => {
         }
     }
 
+
+    // get services data from Database
+    const getServices = async () => {
+       try {
+         const response = await fetch("http://localhost:8000/api/v1/data/service", {
+             method:"GET",
+         });
+         console.log("SERVICES DATA is : ", response);
+ 
+         if(response.ok) {
+            const serviesData = await response.json();  // this will convert the JSON data into object data coz backend send us the JSON data and in frontend we need Object data
+            console.log("After converting services JSON data into Object data : ", serviesData);
+            // console.log("After converting services JSON data into Object data : ", serviesData.message);
+
+            setService(serviesData.message);
+            
+         }
+       } catch (error) {
+            console.log(`Error in Services Frontend/client side and the error is : ${error}`);
+            
+       }
+    }
+
+    
+
+    
+    
+
+
+
     useEffect( () => {
         userAuthentication();
+        getServices();
     }, []);
 
     return (
-        <AuthContext.Provider value={{storeTokenInLocalStorage, isLoggedIn, logoutUser, user}} >
+        <AuthContext.Provider value={{storeTokenInLocalStorage, isLoggedIn, logoutUser, user, service}} >
             {children}
         </AuthContext.Provider>
     );
