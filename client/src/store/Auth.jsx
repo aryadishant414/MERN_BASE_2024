@@ -16,6 +16,7 @@ export const AuthProvider = ({children}) => {
     const isLoggedIn = !!token; // Means agr token hai too "isLoggedIn" will be true or nhi hai too false
 
     const storeTokenInLocalStorage = (serverToken) => {
+        setToken(serverToken); // this LINE I HAVE FORGOT (imp. line of code)
         return localStorage.setItem("token", serverToken);
     }
 
