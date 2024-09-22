@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/Auth.jsx";
-
+import {toast } from 'react-toastify';
 
 export const LoginPage = () => {
     const [user, setUser] = useState({
@@ -46,7 +46,8 @@ export const LoginPage = () => {
          
          // lets empty the state variable
         if(response.ok) {
-            alert(res_data.message);
+            // alert(res_data.message);
+            toast.success(res_data.message);
 
 
             // storing server responsed "token" to our "localStorage"
@@ -59,7 +60,8 @@ export const LoginPage = () => {
             navigate("/");  
         }
         else {
-            alert(res_data.extraDetails ? res_data.extraDetails : "Login Failed");
+            // alert(res_data.extraDetails ? res_data.extraDetails : "Login Failed");
+            toast.error(res_data.extraDetails ? res_data.extraDetails : "Login Failed");
             // setUser({
             //     email: "",
             //     password: "",

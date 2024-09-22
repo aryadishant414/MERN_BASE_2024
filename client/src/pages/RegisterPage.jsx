@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {useNavigate} from "react-router-dom";
 import { useAuth } from "../store/Auth.jsx";
+import {toast } from 'react-toastify';
 
 export const RegisterPage = () => {
     const[user, setUser] = useState({
@@ -59,12 +60,14 @@ export const RegisterPage = () => {
                 password: "",
             });
 
-            alert(user_data.message);
+            // alert(user_data.message);
+            toast.success(user_data.message);
 
             navigate("/login");
                 
         }else {
-            alert(user_data.extraDetails? user_data.extraDetails : user_data.message);
+            // alert(user_data.extraDetails? user_data.extraDetails : user_data.message);
+            toast.warning(user_data.extraDetails? user_data.extraDetails : user_data.message);
         }
 
     } catch (error) {
