@@ -40,13 +40,14 @@ export const LoginPage = () => {
 
          console.log("Login user Response is : ", response);
 
+         const res_data = await response.json(response);
+         console.log("Login Responsed data from server in JSON format is : ", res_data);
+
          
          // lets empty the state variable
         if(response.ok) {
-            alert("Login Successful");
+            alert(res_data.message);
 
-            const res_data = await response.json(response);
-            console.log("Login Responsed data from server in JSON format is : ", res_data);
 
             // storing server responsed "token" to our "localStorage"
             storeTokenInLocalStorage(res_data.token); 
@@ -58,11 +59,11 @@ export const LoginPage = () => {
             navigate("/");  
         }
         else {
-            alert("Invalid Credentials");
-            setUser({
-                email: "",
-                password: "",
-            });
+            alert(res_data.extraDetails ? res_data.extraDetails : "Login Failed");
+            // setUser({
+            //     email: "",
+            //     password: "",
+            // });
         }
          
        } catch (error) {

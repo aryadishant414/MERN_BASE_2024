@@ -28,7 +28,7 @@ const registerPageController = async (req, res) => {
         const userExist = await User.findOne({email: email});
         if(userExist) {
             return res.status(400).send({
-                msg:"User Already Exist"
+                message:"User Already Exist"
             })
         }
 

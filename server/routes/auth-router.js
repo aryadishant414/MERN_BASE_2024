@@ -1,7 +1,7 @@
 import express from 'express';
 import { homePageController, registerPageController, loginPageController, userController} from '../controllers/auth-controller.js';
 import {validate} from '../middlewares/validate-middleware.js'
-import {signupSchema} from '../validators/auth-validator.js'
+import {loginSchema, signupSchema} from '../validators/auth-validator.js'
 import { authMiddleware } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
@@ -14,7 +14,7 @@ router.route("/register")
     registerPageController
 );
 
-router.route("/login").post(loginPageController);
+router.route("/login").post(validate(loginSchema), loginPageController);
 
 router.route("/user").get(authMiddleware,userController);
 

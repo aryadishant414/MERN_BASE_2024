@@ -40,15 +40,14 @@ export const RegisterPage = () => {
         });
         console.log("Register Response is : ", response);
 
-        
+
+        // client requested server responsed data
+        const user_data = await response.json(response);
+        console.log("Register page Server responsed data is : ", user_data);
         
         // lets empty the state variable
         if(response.ok) {
-            
-            // client requested server responsed data
-            const user_data = await response.json(response);
-            console.log("Register page Server responsed data is : ", user_data);
-
+    
             // storing server responsed "token" on our "localStorage"
             storeTokenInLocalStorage(user_data.token);
             
@@ -59,7 +58,13 @@ export const RegisterPage = () => {
                 phone: "",
                 password: "",
             });
-            navigate("/login");    
+
+            alert(user_data.message);
+
+            navigate("/login");
+                
+        }else {
+            alert(user_data.extraDetails? user_data.extraDetails : user_data.message);
         }
 
     } catch (error) {
