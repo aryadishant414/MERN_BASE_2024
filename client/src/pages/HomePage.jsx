@@ -1,4 +1,4 @@
-import {Analytics} from "../components/Analytics.jsx"
+import { Analytics } from "../components/Analytics.jsx";
 
 export const HomePage = () => {
   return (
@@ -11,8 +11,8 @@ export const HomePage = () => {
               <h1>Welcome to Tech World</h1>
               <p>
                 Are you ready to take your business to the next level with
-                cutting-edge IT solutions? Look no further! At Dishant-Tech,
-                we specialize in providing innovative IT services and solutions
+                cutting-edge IT solutions? Look no further! At Dishant-Tech, we
+                specialize in providing innovative IT services and solutions
                 tailored to meet your unique needs.
               </p>
               <div className="btn btn-group">
