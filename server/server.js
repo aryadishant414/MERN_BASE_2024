@@ -8,6 +8,7 @@ import { errorMiddleware } from './middlewares/error-middleware.js';
 import { contactFormController as contactFormRoute } from './routes/contact-router.js';
 import cors from "cors";
 import {router as serviceRoute} from './routes/service-router.js';
+import {router as adminRoute} from './routes/admin-router.js';
 
 
 // lets handle cors (cross origin resource sharing) error
@@ -29,7 +30,12 @@ app.use(express.json());  // Its a middleware that Allow us to send and receive 
 
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/form", contactFormRoute);
-app.use("/api/v1/data", serviceRoute)
+app.use("/api/v1/data", serviceRoute);
+
+
+// lets define admin route
+app.use("api/v1/admin", adminRoute);
+
 
 app.use(errorMiddleware);
 
