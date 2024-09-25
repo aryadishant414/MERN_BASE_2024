@@ -34,7 +34,7 @@ app.use("/api/v1/data", serviceRoute);
 
 
 // lets define admin route
-app.use("api/v1/admin", adminRoute);
+app.use("/api/v1/admin", adminRoute);
 
 
 app.use(errorMiddleware);
