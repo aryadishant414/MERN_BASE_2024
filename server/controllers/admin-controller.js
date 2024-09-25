@@ -1,8 +1,9 @@
 import { User } from "../models/user-model.js"
+import { Contact } from "../models/contact-model.js";
 
 
 // get all users
-    const getAllUsers = async (req,res,next) => {
+    export const getAllUsers = async (req,res,next) => {
     try {
         // const users = await User.find(); // this users contains  password also we are removing passwords inside this see below line
         const users = await User.find({}, {password:0}); 
@@ -25,6 +26,23 @@ import { User } from "../models/user-model.js"
     }
 }
 
-export {
-    getAllUsers
+
+
+// get all contacts
+export const getAllContacts = async (req,res,next) => {
+    try {
+        const contacts = await Contact.find();
+
+        console.log("Data inside contacts is : ", contacts);
+        
+        if(!contacts || contacts.length === 0) {
+            return res.status(404).send({message:"Could not found the Contacts"});
+        }
+
+        res.status(200).send(contacts);
+        
+    } catch (error) {
+        next(error);
+    }
 }
+
