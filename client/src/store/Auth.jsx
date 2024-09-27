@@ -12,6 +12,7 @@ export const AuthProvider = ({children}) => {
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [user, setUser] = useState("");
     const [service, setService] = useState("");
+    const userAuthorization = `Bearer ${token}`;
 
     const isLoggedIn = !!token; // Means agr token hai too "isLoggedIn" will be true or nhi hai too false
 
@@ -34,7 +35,8 @@ export const AuthProvider = ({children}) => {
             const response = await fetch("http://localhost:8000/api/v1/auth/user", {
             method: "GET",
             headers: {
-                Authorization: `Bearer ${token}`,
+                // Authorization: `Bearer ${token}`,
+                Authorization: userAuthorization,
             }
             });
 
@@ -87,7 +89,7 @@ export const AuthProvider = ({children}) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{storeTokenInLocalStorage, isLoggedIn, logoutUser, user, service}} >
+        <AuthContext.Provider value={{storeTokenInLocalStorage, isLoggedIn, logoutUser, user, service, userAuthorization}} >
             {children}
         </AuthContext.Provider>
     );
