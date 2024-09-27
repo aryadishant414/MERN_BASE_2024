@@ -10,6 +10,9 @@ import { PageNotFound } from "./pages/pageNotFound.jsx";
 import { Footer } from "./components/Footer/Footer.jsx";
 import { AuthProvider } from "./store/Auth.jsx";
 import { LogoutPage } from './pages/LogoutPage.jsx';
+import { AdminLayout } from "./components/layouts/Admin-Layout.jsx";
+import { AdminUsers } from "./pages/Admin-Users.jsx";
+import { AdminContacts } from "./pages/Admin-Contacts.jsx";
 
 const App = () => {
   return (
@@ -17,6 +20,8 @@ const App = () => {
       <AuthProvider>
         <BrowserRouter>
           <Navbar />
+
+          {/*Routing */}
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
@@ -26,7 +31,17 @@ const App = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/logout" element={<LogoutPage />} />
             <Route path="*" element={<PageNotFound />} />
+
+            {/* Nested Routing */}
+            <Route path="/admin" element={<AdminLayout />}>
+            <Route path="users" element={<AdminUsers />}/>
+            <Route path="contacts" element={<AdminContacts />}/>
+            </Route>
+
+
           </Routes>
+
+
           <Footer />
         </BrowserRouter>
       </AuthProvider>
