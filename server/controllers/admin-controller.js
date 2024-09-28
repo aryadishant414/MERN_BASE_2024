@@ -27,6 +27,25 @@ import { Contact } from "../models/contact-model.js";
 }
 
 
+// get Single user data
+export const getSingleUserData = async (req, res) => {
+    try {
+        console.log("DATA INSIDE incoming req inside 'getSingleUserData' controller is : ", req);
+        const id = req.params.id;
+
+        const singleUserData = await User.findOne({_id:id}, {password:0});
+
+        console.log("Requested SINGLE USER DATA IS : ", singleUserData);
+
+        res.status(200).send({singleUserData});
+        
+        
+    } catch (error) {
+        next(error);
+    }
+}
+
+
 
 // get all contacts
 export const getAllContacts = async (req,res,next) => {
