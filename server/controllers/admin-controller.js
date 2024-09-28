@@ -46,3 +46,25 @@ export const getAllContacts = async (req,res,next) => {
     }
 }
 
+
+
+
+// Deleting a User by its ID
+export const deleteUserById = async (req, res) => {
+    try {
+        console.log("DATA INSIDE REQUEST THAT IS COMING FROM FRONTEND : ", req);
+        const id = req.params.id; // this we do when frontend is sensding data inside URL
+        const findIdInOurDatabase = await User.findOne({_id: id});
+
+        if(!findIdInOurDatabase) {
+            return res.status(404).send({message: "Do not find the id in DATABASE"});
+        }
+
+        await User.deleteOne({_id:id});
+
+        return res.status(200).send({message: "User Deleted Successfully"});
+
+    } catch (error) {
+        next(error);
+    }
+}

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../store/Auth.jsx";
 
 export const AdminUsers = () => {
-    const {userAuthorization} = useAuth();
+    const {userAuthorization} = useAuth(); // inside this we have "Bearer " token
     const [user, setUser] = useState([]);
 
 
@@ -23,6 +23,26 @@ export const AdminUsers = () => {
             
         } catch (error) {
             console.log("Error while Fetching All users from Frontend");
+            
+        }
+    }
+
+
+    // Delete a user by its ID
+    const deleteUserById = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:8000/api/v1/admin/users/delete/${id}`,{
+                method: "DELETE",
+                headers: {
+                    Authorization: userAuthorization
+                }  
+            });
+
+            if(response.ok) {
+                showAllUsers();
+            }
+        } catch (error) {
+            console.log("ERROR while deleting a user from FRONTEND SIDE");
             
         }
     }
@@ -57,7 +77,13 @@ export const AdminUsers = () => {
                                     <td>{currentUser.email}</td>
                                     <td>{currentUser.phone}</td>
                                     <td>Edit</td>
-                                    <td>Delete</td>
+                                    <td>
+                                        <button onClick={
+                                            () => 
+                                            {
+                                                deleteUserById(currentUser._id);
+                                            }
+                                        }>Delete</button></td>
                                 </tr>
                             )
                              

@@ -544,6 +544,12 @@ td {
   width: 30rem;
 }
 
+td button {
+    background-color: var(--btn-color);
+    color: white;
+}
+
+
 th {
   font-size: large;
   font-weight: bold;
