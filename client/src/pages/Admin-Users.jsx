@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../store/Auth.jsx";
+import {Link, Outlet, useLocation  } from "react-router-dom";
+// import {Outlet} from "react-router-dom";
 
 export const AdminUsers = () => {
     const {userAuthorization} = useAuth(); // inside this we have "Bearer " token
     const [user, setUser] = useState([]);
 
+    const location = useLocation();  // this will give the current route's path
+    
 
     const showAllUsers = async () => {
         try {
@@ -53,7 +57,10 @@ export const AdminUsers = () => {
 
     return (
         <>
-            <section className="admin-users-section">
+        {/* COnditional rendering for Parent and child component(i.e Outlet) */}
+        {
+            location.pathname === "/admin/users" && (
+                <section className="admin-users-section">
             <div className="container">
                 <h1>Admin Users Data</h1>
             </div>
@@ -76,9 +83,9 @@ export const AdminUsers = () => {
                                     <td>{currentUser.username}</td>
                                     <td>{currentUser.email}</td>
                                     <td>{currentUser.phone}</td>
-                                    <td>Edit</td>
+                                    <td><Link to={`/admin/users/update/${currentUser._id}`}>Edit</Link></td>
                                     <td>
-                                        <button onClick={
+                                        <button className="btn" onClick={
                                             () => 
                                             {
                                                 deleteUserById(currentUser._id);
@@ -93,11 +100,10 @@ export const AdminUsers = () => {
             </div>
 
             </section>
-            {/* {user.map((currentUser, index) => {
-                console.log("CURRENT USER IS : ", currentUser.username);
-                return <h1>{currentUser.username}</h1>
-            })} */}
-            {/* <h1>Welcome to Admin Users</h1> */}
+            )
+        }
+            
+            <Outlet />
         </>
     )
 }

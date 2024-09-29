@@ -14,6 +14,9 @@ export const AuthProvider = ({children}) => {
     const [service, setService] = useState("");
     const userAuthorization = `Bearer ${token}`;
 
+    const[isLoading, setIsLoading] = useState(true);
+
+
     const isLoggedIn = !!token; // Means agr token hai too "isLoggedIn" will be true or nhi hai too false
 
     const storeTokenInLocalStorage = (serverToken) => {
@@ -32,6 +35,7 @@ export const AuthProvider = ({children}) => {
     // AUTHENTICATION - to get the currently loggedIN user data
     const userAuthentication = async () => {
         try {
+            setIsLoading(true);
             const response = await fetch("http://localhost:8000/api/v1/auth/user", {
             method: "GET",
             headers: {
@@ -45,6 +49,7 @@ export const AuthProvider = ({children}) => {
                 console.log("CURRENTLY LOGGED IN USER DATA : ", data.userData);
                 
                 setUser(data.userData);
+                setIsLoading(false);
             }
 
         } catch (error) {
@@ -89,7 +94,7 @@ export const AuthProvider = ({children}) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{storeTokenInLocalStorage, isLoggedIn, logoutUser, user, service, userAuthorization}} >
+        <AuthContext.Provider value={{storeTokenInLocalStorage, isLoggedIn, logoutUser, user, service, userAuthorization, isLoading}} >
             {children}
         </AuthContext.Provider>
     );

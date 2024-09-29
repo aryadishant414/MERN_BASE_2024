@@ -1,7 +1,6 @@
 import { User } from "../models/user-model.js"
 import { Contact } from "../models/contact-model.js";
 
-
 // get all users
     export const getAllUsers = async (req,res,next) => {
     try {
@@ -67,6 +66,36 @@ export const getAllContacts = async (req,res,next) => {
 
 
 
+//Update user data
+
+export const updateUserById = async (req, res, next) => {
+    console.log("REQUEST INSIDE UPDATEUSERID is : ", updateUserById);
+    
+    console.log("INSIDE BACKEND 1");
+    try {
+        const id = req.params.id;
+        const updatedUserData = req.body;
+
+        const updatedData = await User.updateOne({_id: id}, {
+            $set: {
+                updatedUserData
+            }
+        });
+
+        if(!updatedData) {
+            return res.status(404).send({message: "Failed to update user by Backend side"});
+        }
+        console.log("SUCCESSFULLY UPDATED SINGLE USER BY BACKEND");
+        
+        return res.status(200).send(updatedUserData);
+
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+
 
 // Deleting a User by its ID
 export const deleteUserById = async (req, res) => {
@@ -83,6 +112,29 @@ export const deleteUserById = async (req, res) => {
 
         return res.status(200).send({message: "User Deleted Successfully"});
 
+    } catch (error) {
+        next(error);
+    }
+}
+
+// Delete Contact by its ID
+
+export const deleteContactById = async (req, res, next) => {
+    try {
+        // console.log("DATA INSIDE REQUEST IN BACKEND IN DELETE A CONTACT is : ", req);
+        const id = req.params.id;
+        console.log("Id of the contact to be deleted is : ", id);
+        
+        const contactToBeDeleted = await Contact.findOne({_id:id});
+
+        if(!contactToBeDeleted) {
+            return res.status(404).send({message: "Error while deleting contact-us Data in backend side"});
+        }
+
+        await Contact.deleteOne({_id:id});
+
+        return res.status(200).send({message:"Contact Deleted Successfully"});
+        
     } catch (error) {
         next(error);
     }

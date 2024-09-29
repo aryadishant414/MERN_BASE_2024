@@ -13,6 +13,8 @@ import { LogoutPage } from './pages/LogoutPage.jsx';
 import { AdminLayout } from "./components/layouts/Admin-Layout.jsx";
 import { AdminUsers } from "./pages/Admin-Users.jsx";
 import { AdminContacts } from "./pages/Admin-Contacts.jsx";
+import { AdminUpdate } from "./pages/Admin-Update.jsx";
+
 
 const App = () => {
   return (
@@ -32,10 +34,18 @@ const App = () => {
             <Route path="/logout" element={<LogoutPage />} />
             <Route path="*" element={<PageNotFound />} />
 
-            {/* Nested Routing */}
+            {/* Nested Routing inside admin */}
             <Route path="/admin" element={<AdminLayout />}>
-            <Route path="users" element={<AdminUsers />}/>
+
+            {/* Nested Routing inside users */}
+            <Route path="users" element={<AdminUsers />}>
+              <Route path="update/:id" element={<AdminUpdate />} />
+            </Route>
+            
+            
             <Route path="contacts" element={<AdminContacts />}/>
+
+
             </Route>
 
 
